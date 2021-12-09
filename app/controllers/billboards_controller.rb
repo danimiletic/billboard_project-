@@ -1,5 +1,11 @@
 class BillboardsController < ApplicationController
 
+
+
+  # FIX THE CREATE BILLBOARD #
+  
+
+  
   def index
     @billboards = Billboard.all
     render component: 'Billboards', props: { billboards: @billboards}
@@ -20,6 +26,15 @@ class BillboardsController < ApplicationController
     render component: 'BillboardEdit', props: { billboard: @billboard }
   end
 
+  def create
+    @billboard = Billboard.new(billboard_params)
+      if @billboard.save
+        redirect_to billboards_path
+      else
+        render component: 'BillboardNew', props: { billboard: @billboard }
+      end
+  end
+
   def update
     @billboard = Billboard.find(params[:id])
     if @billboard.update(billboard_params)
@@ -38,7 +53,7 @@ class BillboardsController < ApplicationController
   private 
 
   def billboard_params
-    params.require(:billboard).permit(:name)
+    params.require(:billboard).permit(:name, :description, :image)
   end
 end
 

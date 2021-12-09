@@ -20,7 +20,7 @@ class ArtistsController < ApplicationController
   def create
     @artist = @billboard.artists.new(artist_params)
     if @artist.save
-      redirect_to billboard_artists_path(@billboard)
+      redirect_to billboards_path
     else
       render component: 'ArtistNew', props: { billboard: @billboard, artist: @artist }
     end
@@ -34,16 +34,16 @@ class ArtistsController < ApplicationController
   def update
     @artist = @billboard.artists.find(params[:id])
     if @artist.update(artist_params)
-      redirect_to billboard_artists_path(@billboard)
+      redirect_to billboards_path
     else
       render component: 'ArtistEdit', props: { billboard: @billboard, artist: @artist }
     end
   end
 
   def destroy
-    @artist = @billbaord.artists.find(params[:id])
+    @artist = @billboard.artists.find(params[:id])
     @artist.destroy
-    redirect_to billboard_artists_path(@billboard)
+    redirect_to billboards_path
   end
 
   private 

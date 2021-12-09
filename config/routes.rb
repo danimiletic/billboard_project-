@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :artists
   end
 
-  resources :artists, except:[:index, :new, :create, :edit, :show, :update, :destroy] do
+  resources :artists do
     resources :songs 
   end
 end
